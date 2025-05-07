@@ -5,6 +5,9 @@ div[class^="card-"] {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
 }
 
 .card-easy {
