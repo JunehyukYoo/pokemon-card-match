@@ -1,9 +1,8 @@
 import "../styles/GameMode.css";
 
-export const GameMode = ({ diff }) => {
-  console.log(diff.img);
+export const GameMode = ({ diff, onSelect }) => {
   return (
-    <div className={`gamemode-${diff.diff}`}>
+    <div className={`gamemode-${diff.diff}`} onClick={onSelect}>
       <div
         className={`card-${diff.diff}`}
         style={{ backgroundImage: `url(${diff.img})` }}

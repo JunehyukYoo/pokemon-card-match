@@ -5,7 +5,7 @@ import pikachu from "../assets/pikachu.png";
 import charizard from "../assets/charizard.svg";
 import "../styles/Accordion.css";
 
-export const Accordion = () => {
+export const Accordion = ({ onSelect }) => {
   const DIFFICULTY = [
     {
       diff: "easy",
@@ -20,7 +20,7 @@ export const Accordion = () => {
     <div className="accordion">
       <Sidebar />
       {DIFFICULTY.map((diff) => (
-        <GameMode key={diff.id} diff={diff} />
+        <GameMode key={diff.id} diff={diff} onSelect={onSelect} />
       ))}
     </div>
   );
