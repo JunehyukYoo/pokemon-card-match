@@ -1,5 +1,7 @@
 import { DIFFICULTY } from "../data";
 import { useState, useEffect } from "react";
+import GameCard from "../components/GameCard";
+import "../styles/Game.css";
 
 const CARD_NUM = {
   easy: 8,
@@ -13,18 +15,15 @@ export const Game = ({ difficulty, handleChange, cards }) => {
   const [toDisplay, setToDisplay] = useState(null);
 
   const selection = cards.slice(0, CARD_NUM[difficulty]);
+  console.log(cards);
   return (
     <div>
       {finished ? (
         <div>You Finished!</div>
       ) : (
-        <div>
+        <div className="game-card-container">
           {selection &&
-            selection.map((card) => (
-              <div key={card.name} style={{ backgroundImage: card.url }}>
-                {card.name}
-              </div>
-            ))}
+            selection.map((card, idx) => <GameCard key={idx} card={card} />)}
         </div>
       )}
     </div>

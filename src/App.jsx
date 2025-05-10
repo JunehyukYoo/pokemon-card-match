@@ -25,7 +25,6 @@ function App() {
 
     async function loadData() {
       try {
-        // 1) fetch Pokémon list
         const offset = Math.floor(Math.random() * 1282);
         const res = await fetch(
           `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`,
@@ -33,17 +32,15 @@ function App() {
         );
         if (!res.ok) throw new Error(`Pokémon fetch failed (${res.status})`);
         const { results } = await res.json();
-
-        // 2) for each Pokémon, pass the same signal
         const enriched = await Promise.all(
           results.map(async (poke) => {
-            const q = encodeURIComponent(poke.name);
-            const url = `${GIPHY_SEARCH}?api_key=${GIPHY_API_KEY}&q=${q}&limit=1`;
-            const gifRes = await fetch(url, { signal });
-            if (!gifRes.ok) throw new Error(`Giphy error for ${poke.name}`);
-            const gifJson = await gifRes.json();
+            const pokeapi = await fetch(poke.url, { signal });
+            if (!pokeapi.ok) {
+              throw new Error(`Retrieve pokemon data aerror for ${poke.name}`);
+            }
+            const pokeData = await pokeapi.json();
             const imageUrl =
-              gifJson.data[0]?.images?.downsized_medium?.url ?? null;
+              pokeData.sprites.other["official-artwork"].front_default;
             return { ...poke, imageUrl };
           })
         );
@@ -62,6 +59,12 @@ function App() {
 
     return () => controller.abort();
   }, []);
+
+  useEffect(() => {
+    if (cards) {
+      console.log(cards);
+    }
+  }, [cards]);
 
   return (
     <>
