@@ -15,7 +15,21 @@ export const Game = ({ difficulty, handleChange, cards }) => {
   const [toDisplay, setToDisplay] = useState(null);
   const [totalMoves, setTotalMoves] = useState(0);
 
-  const selection = cards.slice(0, CARD_NUM[difficulty]);
+  const originalCards = cards.slice(0, CARD_NUM[difficulty]).map((card) => ({
+    ...card,
+    isCopy: false,
+    isFlipped: false,
+  }));
+  const copyCards = originalCards.map((card) => ({
+    ...card,
+    isCopy: true,
+    isFlipped: false,
+  }));
+
+  const selection = [...originalCards, ...copyCards].sort(
+    () => Math.random() - 0.5
+  );
+
   console.log(cards);
   return (
     <div>
