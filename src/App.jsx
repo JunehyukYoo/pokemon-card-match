@@ -1,34 +1,85 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Accordion } from "./pages/Accordion";
+import { Game } from "./pages/Game.jsx";
 import "./App.css";
 
+const GIPHY_API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
+const GIPHY_SEARCH = "https://api.giphy.com/v1/gifs/search";
+
 function App() {
+  const MAX_CARDS = 16;
   const [difficulty, setDifficulty] = useState("");
+  const [cards, setCards] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const selectDifficulty = (e) => {
     const selectedDifficulty = e.target.parentElement.className.split("-")[1];
     console.log(selectedDifficulty);
     setDifficulty(selectedDifficulty);
   };
 
-  const numberCards = {
-    easy: 8,
-    medium: 12,
-    hard: 16,
-  };
+  useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    async function loadData() {
+      try {
+        const offset = Math.floor(Math.random() * 1282);
+        const res = await fetch(
+          `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`,
+          { signal }
+        );
+        if (!res.ok) throw new Error(`Pokémon fetch failed (${res.status})`);
+        const { results } = await res.json();
+        const enriched = await Promise.all(
+          results.map(async (poke) => {
+            const pokeapi = await fetch(poke.url, { signal });
+            if (!pokeapi.ok) {
+              throw new Error(`Retrieve pokemon data aerror for ${poke.name}`);
+            }
+            const pokeData = await pokeapi.json();
+            const imageUrl =
+              pokeData.sprites.other["official-artwork"].front_default;
+            return { ...poke, imageUrl };
+          })
+        );
+
+        setCards(enriched);
+      } catch (err) {
+        if (err.name !== "AbortError") {
+          setError(err.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadData();
+
+    return () => controller.abort();
+  }, []);
+
+  useEffect(() => {
+    if (cards) {
+      console.log(cards);
+    }
+  }, [cards]);
 
   return (
     <>
-      {difficulty === "" ? (
+      {loading ? (
+        <div>Loading</div>
+      ) : difficulty === "" ? (
         <div className="App">
           <Accordion onSelect={selectDifficulty} />
         </div>
       ) : (
-        <div className="game-container">
-          <h1>Game</h1>
-          <p>Difficulty: {difficulty}</p>
-          <button onClick={() => setDifficulty("")}>Back</button>
-          {/* Add your game components here */}
-        </div>
+        <Game
+          difficulty={difficulty}
+          handleChange={() => setDifficulty("")}
+          cards={cards}
+        />
       )}
     </>
   );
