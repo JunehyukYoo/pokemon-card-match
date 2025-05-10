@@ -13,11 +13,15 @@ export const Game = ({ difficulty, handleChange, cards }) => {
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
   const [toDisplay, setToDisplay] = useState(null);
+  const [totalMoves, setTotalMoves] = useState(0);
 
   const selection = cards.slice(0, CARD_NUM[difficulty]);
   console.log(cards);
   return (
     <div>
+      <div>
+        <button onClick={handleChange}>Back</button>
+      </div>
       {finished ? (
         <div>You Finished!</div>
       ) : (
