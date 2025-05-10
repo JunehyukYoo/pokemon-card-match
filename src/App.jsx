@@ -9,6 +9,13 @@ function App() {
     console.log(selectedDifficulty);
     setDifficulty(selectedDifficulty);
   };
+
+  const numberCards = {
+    easy: 8,
+    medium: 12,
+    hard: 16,
+  };
+
   return (
     <>
       {difficulty === "" ? (
@@ -16,7 +23,12 @@ function App() {
           <Accordion onSelect={selectDifficulty} />
         </div>
       ) : (
-        <div onClick={() => setDifficulty("")}>You chose {difficulty}</div>
+        <div className="game-container">
+          <h1>Game</h1>
+          <p>Difficulty: {difficulty}</p>
+          <button onClick={() => setDifficulty("")}>Back</button>
+          {/* Add your game components here */}
+        </div>
       )}
     </>
   );
