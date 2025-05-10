@@ -73,7 +73,7 @@ function App() {
       ) : (
         <Game
           difficulty={difficulty}
-          handleChange={() => setDifficulty("")}
+          handleChange={[setDifficulty]}
           cards={cards}
         />
       )}

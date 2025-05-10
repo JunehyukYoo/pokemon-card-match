@@ -25,22 +25,32 @@ export const Game = ({ difficulty, handleChange, cards }) => {
     isFlipped: false,
   }));
 
-  const selection = [...originalCards, ...copyCards].sort(
+  const select = [...originalCards, ...copyCards].sort(
     () => Math.random() - 0.5
   );
 
-  console.log(cards);
+  const [selection, setSelection] = useState(select);
+  console.log(selection);
+
   return (
     <div>
       <div>
-        <button onClick={handleChange}>Back</button>
+        <button onClick={() => handleChange[0]("")}>Back</button>
+        <p>Turn is {turn}</p>
       </div>
       {finished ? (
         <div>You Finished!</div>
       ) : (
         <div className="game-card-container">
           {selection &&
-            selection.map((card, idx) => <GameCard key={idx} card={card} />)}
+            selection.map((card, idx) => (
+              <GameCard
+                key={idx}
+                index={idx}
+                card={card}
+                handleChange={[setSelection, setTurn]}
+              />
+            ))}
         </div>
       )}
     </div>
