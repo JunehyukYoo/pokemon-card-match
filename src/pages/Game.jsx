@@ -12,8 +12,7 @@ const CARD_NUM = {
 export const Game = ({ difficulty, handleChange, cards }) => {
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
-  const [toDisplay, setToDisplay] = useState(null);
-  const [totalMoves, setTotalMoves] = useState(0);
+  const [turn, setTurn] = useState(0);
 
   const originalCards = cards.slice(0, CARD_NUM[difficulty]).map((card) => ({
     ...card,
