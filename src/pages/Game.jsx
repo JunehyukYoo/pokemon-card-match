@@ -33,9 +33,10 @@ export const Game = ({ difficulty, handleChange, cards }) => {
   console.log(selection);
 
   return (
-    <div>
-      <div>
+    <div className="game-container">
+      <div className="game-header">
         <button onClick={() => handleChange[0]("")}>Back</button>
+        <h1>{difficulty.toUpperCase()}</h1>
         <p>Turn is {turn}</p>
       </div>
       {finished ? (
