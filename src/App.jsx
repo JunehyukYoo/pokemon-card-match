@@ -3,11 +3,7 @@ import { Accordion } from "./pages/Accordion";
 import { Game } from "./pages/Game.jsx";
 import "./App.css";
 
-const GIPHY_API_KEY = import.meta.env.VITE_GIPHY_API_KEY;
-const GIPHY_SEARCH = "https://api.giphy.com/v1/gifs/search";
-
 function App() {
-  const MAX_CARDS = 16;
   const [difficulty, setDifficulty] = useState("");
   const [cards, setCards] = useState(null);
   const [error, setError] = useState(null);
@@ -61,10 +57,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (cards) {
-      console.log(cards);
+    if (error) {
+      console.log(`Error: ${error}`);
     }
-  }, [cards]);
+  }, [error]);
 
   return (
     <>
