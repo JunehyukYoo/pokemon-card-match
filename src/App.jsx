@@ -11,7 +11,6 @@ function App() {
 
   const selectDifficulty = (e) => {
     const selectedDifficulty = e.target.parentElement.className.split("-")[1];
-    console.log(selectedDifficulty);
     setDifficulty(selectedDifficulty);
   };
 
