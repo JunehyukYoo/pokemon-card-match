@@ -99,8 +99,16 @@ export const Game = ({ difficulty, handleChange, cards }) => {
       <div className="game-header">
         <button onClick={() => handleChange[0]("")}>Back</button>
         <h1>{difficulty.toUpperCase()}</h1>
-        <p>Turn {turn}</p>
-        <p>Score {score}</p>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "5px",
+          }}
+        >
+          <p>Turn: {turn}</p>
+          <p>Score: {score}</p>
+        </div>
       </div>
 
       <div className="game-card-container">

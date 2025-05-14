@@ -1,15 +1,18 @@
 .game-container {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
   padding: 1rem;
+  gap: 1rem;
 }
 
 .game-header {
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
+  align-items: center;
+  padding: 0 1rem;
 }
 
 .game-card-container {
@@ -20,7 +23,18 @@
 }
 
 .game-card {
-  border: 2px solid red;
-  width: 200px;
-  height: 200px;
+  border: 2px solid rgb(255, 57, 57);
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 150px;
+  height: 150px;
+}
+
+.game-card h4 {
+  margin: 0;
 }

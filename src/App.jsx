@@ -31,7 +31,7 @@ function App() {
           results.map(async (poke) => {
             const pokeapi = await fetch(poke.url, { signal });
             if (!pokeapi.ok) {
-              throw new Error(`Retrieve pokemon data aerror for ${poke.name}`);
+              throw new Error(`Retrieve pokemon data error for ${poke.name}`);
             }
             const pokeData = await pokeapi.json();
             const imageUrl =
@@ -60,7 +60,7 @@ function App() {
       console.log(`Error: ${error}`);
     }
   }, [error]);
-
+  console.log(cards);
   return (
     <>
       {loading ? (
