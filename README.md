@@ -1,12 +1,41 @@
-# React + Vite
+# Pokémon Memory Match
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fun, React‑based memory card matching game powered by the free [PokéAPI](https://pokeapi.co/). Flip over pairs of Pokémon cards, test your memory, and see how many turns it takes you to match them all!
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Dynamic Pokémon Fetching**  
+  Pulls random Pokémon sprites from the PokéAPI each time you play.
 
-## Expanding the ESLint configuration
+- **Card Pairing & Shuffling**  
+  Automatically generates matching pairs and shuffles them at the start of every game.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Match Tracking & Scoring**  
+  Tracks the number of turns (card flips) you take to find all the matches.
+
+## 🛠️ Tech Stack
+
+- **React**
+- **JavaScript (ES6+)**
+- **CSS Modules**
+- **PokéAPI** for fetching Pokémon data
+
+## 📥 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v14+
+- npm (comes with Node) or [Yarn](https://yarnpkg.com/)
+
+### Installation
+
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/<your‑username>/react-pokemon-memory-match.git
+   cd react-pokemon-memory-match
+   ```
+2. **Host local development server and play the game**
+   ```bash
+   npm install
+   npm run dev
+   ```
